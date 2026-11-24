@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d16">
+  <title>SENTINEL | Security Operations</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="primary-sidebar">
+      <a class="brand" href="#overview" aria-label="Sentinel home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><path d="M16 3 27 7v8c0 7.1-4.7 11.6-11 14C9.7 26.6 5 22.1 5 15V7l11-4Z"/><path d="m11 16 3.2 3.2L21.5 12"/></svg>
+        </span>
+        <span class="brand-copy"><strong>SENTINEL</strong><small>SECURITY OPERATIONS</small></span>
+      </a>
+
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a class="nav-link active" href="#overview" aria-current="page"><span class="nav-icon">◫</span>Overview</a>
+        <a class="nav-link" href="#events"><span class="nav-icon">≋</span>Event stream<span class="nav-count" id="event-nav-count">12</span></a>
+        <a class="nav-link" href="#incidents"><span class="nav-icon">◉</span>Incidents<span class="nav-count alert-count">4</span></a>
+        <a class="nav-link" href="#threat-map"><span class="nav-icon">◎</span>Threat map</a>
+      </nav>
+
+      <div class="workspace-label nav-spacer">MANAGE</div>
+      <nav class="primary-nav" aria-label="Management navigation">
+        <a class="nav-link" href="#risk"><span class="nav-icon">◇</span>Risk posture</a>
+        <button class="nav-link" type="button" id="nav-report"><span class="nav-icon">▤</span>Reports</button>
+        <a class="nav-link" href="#assistant"><span class="nav-icon">✳</span>Intel assistant<span class="new-tag">NEW</span></a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="plan-card">
+          <div class="plan-title"><span class="plan-dot"></span>Environment status</div>
+          <p>All systems operational</p>
+          <div class="plan-meter"><span></span></div>
+          <small>Last scan 2 minutes ago</small>
+        </div>
+        <button class="nav-link settings-link" type="button" id="open-settings"><span class="nav-icon">⚙</span>Settings</button>
+        <div class="profile">
+          <button class="avatar profile-avatar" type="button" aria-label="Open Matlhatse profile" id="profile-options">M</button>
+          <div class="profile-copy"><strong>Matlhatse</strong><small>Security Analyst</small></div>
+        </div>
+      </div>
+    </aside>
+    <button class="mobile-scrim" id="mobile-scrim" type="button" aria-label="Close navigation" tabindex="-1"></button>
+
+    <main class="main-content" id="overview">
+      <header class="topbar">
+        <div class="mobile-brand"><button class="icon-button mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-sidebar">☰</button><span class="brand-mark small-mark" aria-hidden="true">S</span><strong>SENTINEL</strong></div>
+        <div class="breadcrumbs"><span>Security operations</span><span class="crumb-slash">/</span><strong>Overview</strong></div>
+        <div class="topbar-actions">
+          <label class="search-box">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg>
+            <input id="global-search" type="search" placeholder="Search events..." aria-label="Search events">
+            <kbd>⌘ K</kbd>
+          </label>
+          <button class="icon-button notification-button" type="button" aria-label="Notifications" id="open-notifications">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M15.5 7.5a5.5 5.5 0 0 0-11 0c0 6-2 6-2 7.5h15c0-1.5-2-1.5-2-7.5ZM8 17h4"/></svg><i></i>
+          </button>
+          <button class="icon-button mobile-action" type="button" aria-label="Open analyst profile" id="profile-topbar">M</button>
+          <button class="icon-button mobile-action" type="button" aria-label="Open simulation settings" id="settings-topbar">⚙</button>
+          <div class="topbar-date"><span class="date-dot"></span><span id="current-date">--</span></div>
+        </div>
+      </header>
+
+      <div class="content-wrap">
+        <section class="page-heading">
+          <div>
+            <div class="eyebrow"><span class="live-pulse"></span>SIMULATED SECURITY OVERVIEW</div>
+            <h1>Good morning, Matlhatse <span class="wave">✦</span></h1>
+            <p>Here’s what’s happening across your environment today.</p>
+          </div>
+          <div class="heading-actions">
+            <button class="button button-quiet" id="pause-stream" type="button"><span class="pause-icon">Ⅱ</span><span>Pause stream</span></button>
+            <button class="button button-primary" type="button" id="generate-report"><span>＋</span> Generate report</button>
+          </div>
+        </section>
+
+        <section class="metric-grid" aria-label="Security metrics">
+          <article class="metric-card">
+            <div class="metric-top"><span>Threats detected</span><span class="metric-icon red-icon">⌁</span></div>
+            <div class="metric-value" id="threat-count">1,284</div>
+            <div class="metric-foot"><span class="trend negative">↑ 12.8%</span><span>vs. last 24 hours</span></div>
+            <div class="sparkline spark-red"><svg viewBox="0 0 110 32" preserveAspectRatio="none" aria-hidden="true"><path d="M0 26 12 22 22 24 33 12 43 18 54 10 66 16 76 8 88 12 99 3 110 6"/></svg></div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-top"><span>Active incidents</span><span class="metric-icon orange-icon">◉</span></div>
+            <div class="metric-value" id="incident-count">04</div>
+            <div class="metric-foot"><span class="trend negative">↑ 2 new</span><span>since yesterday</span></div>
+            <div class="sparkline spark-orange"><svg viewBox="0 0 110 32" preserveAspectRatio="none" aria-hidden="true"><path d="M0 25 12 25 22 19 34 22 45 12 56 15 67 8 77 13 89 6 99 9 110 2"/></svg></div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-top"><span>Mean time to respond</span><span class="metric-icon blue-icon">◷</span></div>
+            <div class="metric-value">14<span class="metric-unit">m</span> 32<span class="metric-unit">s</span></div>
+            <div class="metric-foot"><span class="trend positive">↓ 8.4%</span><span>faster this week</span></div>
+            <div class="sparkline spark-blue"><svg viewBox="0 0 110 32" preserveAspectRatio="none" aria-hidden="true"><path d="M0 5 12 10 22 7 34 14 45 12 56 18 67 14 77 23 89 18 99 27 110 24"/></svg></div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-top"><span>Assets monitored</span><span class="metric-icon green-icon">⌘</span></div>
+            <div class="metric-value">2,406</div>
+            <div class="metric-foot"><span class="trend neutral">● 99.2%</span><span>coverage across assets</span></div>
+            <div class="sparkline spark-green"><svg viewBox="0 0 110 32" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20 12 18 22 20 34 14 45 17 56 10 67 13 77 9 89 11 99 5 110 7"/></svg></div>
+          </article>
+        </section>
+
+        <section class="overview-grid">
+          <article class="panel activity-panel">
+            <div class="panel-heading">
+              <div><h2>Threat activity</h2><p>Security events detected over time</p></div>
+              <div class="panel-controls"><span class="legend"><i></i>Events</span>
+                <select id="activity-range" aria-label="Threat activity time range"><option value="24">Last 24 hours</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option></select>
+              </div>
+            </div>
+            <div class="chart-summary"><strong id="chart-total">1,284</strong><span>events in selected period</span><span class="chart-change">↑ 12.8%</span></div>
+            <div class="chart-wrap">
+              <div class="y-axis"><span>400</span><span>300</span><span>200</span><span>100</span><span>0</span></div>
+              <svg class="activity-chart" id="activity-chart" viewBox="0 0 700 190" preserveAspectRatio="none" role="img" aria-label="Threat activity trend chart">
+                <defs><linearGradient id="chart-fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#20c997" stop-opacity=".2"/><stop offset="100%" stop-color="#20c997" stop-opacity="0"/></linearGradient></defs>
+                <path class="chart-grid" d="M0 10H700M0 52H700M0 94H700M0 136H700M0 178H700"/>
+                <path class="chart-area" d="M0 142 30 134 60 146 90 119 120 126 150 102 180 114 210 83 240 95 270 106 300 73 330 86 360 62 390 75 420 43 450 58 480 69 510 36 540 48 570 30 600 42 630 19 660 30 700 12V190H0Z"/>
+                <path class="chart-line" d="M0 142 30 134 60 146 90 119 120 126 150 102 180 114 210 83 240 95 270 106 300 73 330 86 360 62 390 75 420 43 450 58 480 69 510 36 540 48 570 30 600 42 630 19 660 30 700 12"/>
+                <circle class="chart-point" cx="700" cy="12" r="4"/>
+              </svg>
+              <div class="x-axis" id="chart-labels"><span>12 AM</span><span>2 AM</span><span>4 AM</span><span>6 AM</span><span>8 AM</span><span>10 AM</span><span>12 PM</span><span>2 PM</span><span>4 PM</span><span>6 PM</span><span>8 PM</span><span>10 PM</span></div>
+            </div>
+          </article>
+
+          <article class="panel map-panel" id="threat-map">
+            <div class="panel-heading">
+              <div><h2>Global threat map</h2><p>Simulated attack origins</p></div>
+              <button class="more-button" type="button" aria-label="Map details" id="map-details">···</button>
+            </div>
+            <div class="map-legend"><span><i class="legend-critical"></i>Critical</span><span><i class="legend-high"></i>High</span><span><i class="legend-medium"></i>Medium</span></div>
+            <div class="map-canvas">
+              <svg class="world-map" viewBox="0 0 620 300" role="img" aria-label="Map showing simulated attacks from around the world">
+                <defs><pattern id="map-grid" width="31" height="31" patternUnits="userSpaceOnUse"><path d="M31 0H0V31" fill="none" stroke="#1b2b3a" stroke-width=".6"/></pattern></defs>
+                <rect width="620" height="300" fill="url(#map-grid)"/>
+                <g class="landmass">
+                  <path d="m62 78 19-16 31-4 17 10 20-2 16 10-5 14-18 4-8 12-18 4-7 16-14 3-7 17-17-2-4-15-13-7-7-18 7-11-8-15zM143 155l20 3 14 13-2 20-10 14-7 23-11 20-9-5-3-24-9-16 7-19-4-13zM279 62l17-10 23 4 10 11-7 10-18 1-9 10-15-5-9-10zM311 105l16-9 28 5 13 14 18 6 7 18-11 14-9 25-16 15-8 25-15 17-14-14-4-24-13-18-4-20-16-16 2-17 13-8-2-13 10-8-5-12zM348 63l29-13 39 4 17 11 32 3 22 14-3 15-23 4-12 15-22 1-12 13-20-5-5-15-21-5-8-15-17-4-9-13zM461 180l21-9 27 6 14 16-8 13-18 4-19-10-17-2z"/>
+                  <path d="m525 216 12-5 12 8-4 12-15 2z"/>
+                </g>
+                <g class="attack-lines">
+                  <path d="M112 103Q292 58 390 113"/><path d="M493 104Q421 61 390 113"/><path d="M215 179Q320 142 390 113"/><path d="M390 113Q448 137 497 189"/>
+                </g>
+                <g class="map-point point-critical"><circle class="pulse" cx="112" cy="103" r="10"/><circle class="point-core" cx="112" cy="103" r="3.5"/></g>
+                <g class="map-point point-high"><circle class="pulse" cx="493" cy="104" r="9"/><circle class="point-core" cx="493" cy="104" r="3"/></g>
+                <g class="map-point point-medium"><circle class="pulse" cx="215" cy="179" r="8"/><circle class="point-core" cx="215" cy="179" r="2.7"/></g>
+                <g class="map-point point-high"><circle class="pulse" cx="497" cy="189" r="9"/><circle class="point-core" cx="497" cy="189" r="3"/></g>
+                <circle class="map-target" cx="390" cy="113" r="4"/><circle class="map-target-ring" cx="390" cy="113" r="9"/>
+              </svg>
+              <div class="map-tooltip"><span class="tooltip-dot"></span><div><strong>Singapore</strong><small>Target network</small></div></div>
+            </div>
+            <div class="map-footer"><span><b>18</b> attack origins</span><span><b>6</b> countries affected</span><button type="button" class="text-button" id="view-map">View map <span>→</span></button></div>
+          </article>
+        </section>
+
+        <section class="bottom-grid">
+          <article class="panel events-panel" id="events">
+            <div class="panel-heading">
+              <div><h2>Recent security events <span class="live-label"><i></i>SIMULATED</span></h2><p>Simulated activity across your environment</p></div>
+              <button class="text-button" type="button" id="toggle-event-history">View all events <span>→</span></button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>EVENT</th><th>SEVERITY</th><th>SOURCE</th><th>LOCATION</th><th>TIME</th></tr></thead>
+                <tbody id="event-rows">
+                  <tr data-search="brute force authentication failures 185.220.101.47 frankfurt"><td><span class="event-type"><span class="event-symbol red-text">⌁</span><span><strong>Brute force attempt</strong><small>Multiple authentication failures</small></span></span></td><td><span class="severity severity-critical">Critical</span></td><td class="mono">185.220.101.47</td><td><span class="location"><i class="flag">🇩🇪</i> Frankfurt, DE</span></td><td class="event-time">Just now</td></tr>
+                  <tr data-search="privilege escalation root access 103.74.120.8 singapore"><td><span class="event-type"><span class="event-symbol orange-text">↗</span><span><strong>Privilege escalation</strong><small>Unexpected root access request</small></span></span></td><td><span class="severity severity-high">High</span></td><td class="mono">103.74.120.8</td><td><span class="location"><i class="flag">🇸🇬</i> Singapore, SG</span></td><td class="event-time">2 min ago</td></tr>
+                  <tr data-search="malware detected trojan endpoint 45.33.32.156 new york"><td><span class="event-type"><span class="event-symbol red-text">⌘</span><span><strong>Malware detected</strong><small>Trojan found on endpoint</small></span></span></td><td><span class="severity severity-critical">Critical</span></td><td class="mono">45.33.32.156</td><td><span class="location"><i class="flag">🇺🇸</i> New York, US</span></td><td class="event-time">5 min ago</td></tr>
+                  <tr data-search="suspicious login failed mfa 91.240.118.172 amsterdam"><td><span class="event-type"><span class="event-symbol blue-text">◉</span><span><strong>Suspicious login</strong><small>Failed MFA verification</small></span></span></td><td><span class="severity severity-medium">Medium</span></td><td class="mono">91.240.118.172</td><td><span class="location"><i class="flag">🇳🇱</i> Amsterdam, NL</span></td><td class="event-time">8 min ago</td></tr>
+                  <tr data-search="port scan network reconnaissance 194.26.135.119 moscow"><td><span class="event-type"><span class="event-symbol blue-text">⌕</span><span><strong>Port scan detected</strong><small>Network reconnaissance activity</small></span></span></td><td><span class="severity severity-low">Low</span></td><td class="mono">194.26.135.119</td><td><span class="location"><i class="flag">🇷🇺</i> Moscow, RU</span></td><td class="event-time">12 min ago</td></tr>
+                </tbody>
+              </table>
+              <div class="empty-state" id="no-events" hidden>No events match your search.</div>
+            </div>
+          </article>
+
+          <aside class="right-column">
+            <article class="panel incidents-panel" id="incidents">
+              <div class="panel-heading"><div><h2>Incident queue <span class="queue-count" id="queue-count">4</span></h2><p>Requiring analyst attention</p></div><button class="more-button" type="button" aria-label="Acknowledge all incidents" id="acknowledge-all">✓</button></div>
+              <div class="incident-list" id="incident-list">
+                <div class="incident-item"><span class="incident-severity sev-critical"></span><div class="incident-copy"><strong>Ransomware activity</strong><small>INC-2024-0847 · 4 min ago</small></div><button class="incident-action" type="button" aria-label="Acknowledge Ransomware activity">↗</button></div>
+                <div class="incident-item"><span class="incident-severity sev-high"></span><div class="incident-copy"><strong>Unusual data transfer</strong><small>INC-2024-0846 · 18 min ago</small></div><button class="incident-action" type="button" aria-label="Acknowledge Unusual data transfer">↗</button></div>
+                <div class="incident-item"><span class="incident-severity sev-high"></span><div class="incident-copy"><strong>Compromised credentials</strong><small>INC-2024-0845 · 32 min ago</small></div><button class="incident-action" type="button" aria-label="Acknowledge Compromised credentials">↗</button></div>
+                <div class="incident-item"><span class="incident-severity sev-medium"></span><div class="incident-copy"><strong>Policy violation</strong><small>INC-2024-0844 · 1 hr ago</small></div><button class="incident-action" type="button" aria-label="Acknowledge Policy violation">↗</button></div>
+              </div>
+              <button class="view-incidents" type="button" id="view-incidents">View all incidents <span>→</span></button>
+            </article>
+
+            <article class="panel risk-panel" id="risk">
+              <div class="panel-heading"><div><h2>Risk posture</h2><p>Overall environment health</p></div><span class="risk-score">72<span>/100</span></span></div>
+              <div class="risk-bar"><span></span></div>
+              <div class="risk-status"><span><i class="risk-dot"></i>Elevated risk</span><span>↓ 4 pts this week</span></div>
+              <div class="risk-breakdown"><span>Critical <b>3</b></span><span>High <b>12</b></span><span>Medium <b>28</b></span></div>
+            </article>
+          </aside>
+        </section>
+
+        <section class="assistant-panel panel" id="assistant">
+          <div class="assistant-icon">✳</div>
+          <div class="assistant-copy"><div class="assistant-title">SENTINEL Intelligence <span class="beta-tag">DEMO</span></div><p>Ask about threats, incidents, or your security posture. Answers use sample dashboard data.</p><div class="assistant-answer" id="assistant-answer" aria-live="polite"></div></div>
+          <form id="assistant-form" class="assistant-form"><input id="assistant-input" type="text" placeholder="e.g. Summarize today’s critical threats..." aria-label="Ask the intelligence assistant"><button type="submit" aria-label="Send question">↑</button></form>
+        </section>
+        <footer class="page-footer"><span>© 2024 SENTINEL Security</span><span><i class="footer-status"></i><span id="simulation-status">Simulation running</span><span class="footer-divider">·</span>Demo environment</span></footer>
+      </div>
+    </main>
+  </div>
+  <dialog class="app-dialog" id="settings-dialog" aria-labelledby="settings-title">
+    <form method="dialog">
+      <div class="dialog-heading"><div><h2 id="settings-title">Simulation settings</h2><p>These settings affect this browser demo only.</p></div><button class="dialog-close" aria-label="Close settings">×</button></div>
+      <label class="dialog-field">Event simulation interval
+        <select id="simulation-interval"><option value="5">Every 5 seconds</option><option value="9">Every 9 seconds</option><option value="15">Every 15 seconds</option><option value="30">Every 30 seconds</option></select>
+      </label>
+      <label class="dialog-toggle"><input type="checkbox" id="simulation-enabled" checked><span>Generate simulated events</span></label>
+      <div class="dialog-actions"><button class="button button-quiet" value="cancel">Close</button><button class="button button-primary" id="save-settings" type="button">Save settings</button></div>
+    </form>
+  </dialog>
+  <dialog class="app-dialog map-dialog" id="map-dialog" aria-labelledby="map-dialog-title">
+    <form method="dialog">
+      <div class="dialog-heading"><div><h2 id="map-dialog-title">Simulated threat origins</h2><p>Sample activity only; locations are illustrative.</p></div><button class="dialog-close" aria-label="Close map details">×</button></div>
+      <div class="origin-list">
+        <div><span class="origin-dot critical-dot"></span><strong>Frankfurt, DE</strong><small>Brute force attempts · Critical</small></div>
+        <div><span class="origin-dot high-dot"></span><strong>Singapore, SG</strong><small>Privilege escalation · High</small></div>
+        <div><span class="origin-dot medium-dot"></span><strong>Amsterdam, NL</strong><small>Suspicious authentication · Medium</small></div>
+        <div><span class="origin-dot high-dot"></span><strong>New York, US</strong><small>Malware callback · High</small></div>
+      </div>
+      <div class="dialog-actions"><button class="button button-quiet" value="close">Close</button></div>
+    </form>
+  </dialog>
+  <dialog class="app-dialog" id="profile-dialog" aria-labelledby="profile-title">
+    <form method="dialog">
+      <div class="dialog-heading"><div><h2 id="profile-title">Analyst profile</h2><p>Local demonstration session</p></div><button class="dialog-close" aria-label="Close profile">×</button></div>
+      <div class="profile-detail"><div class="avatar">M</div><div><strong>Matlhatse</strong><small>Security Analyst · Demo account</small></div></div>
+      <p class="dialog-note">Account management and permissions require an authenticated SENTINEL service.</p>
+      <div class="dialog-actions"><button class="button button-quiet" value="close">Close</button></div>
+    </form>
+  </dialog>
+  <div class="toast-region" id="toast-region" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
